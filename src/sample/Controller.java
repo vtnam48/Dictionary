@@ -55,9 +55,12 @@ public class Controller implements Initializable {
         listView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     Word selectedWord = dictionary.getData().get(newValue);
-                    String explain = selectedWord.getWord_explain();
-                    engine = webView.getEngine();
-                    engine.loadContent(explain, "text/html");
+                    if (selectedWord != null) {
+                        String explain = selectedWord.getWord_explain();
+                        engine = webView.getEngine();
+                        engine.loadContent(explain, "text/html");
+                    }
+
                 }
         );
 
@@ -82,6 +85,7 @@ public class Controller implements Initializable {
     public void setSceneEtoV(ActionEvent e) throws IOException{
         listView.getItems().clear();
         listView.getSelectionModel().clearSelection();
+        //engine.loadContent(null);
 
         loadDataEtoV();
         listView.getItems().addAll(dictionary.getData().keySet());
@@ -90,7 +94,7 @@ public class Controller implements Initializable {
     public void setSceneVtoE(ActionEvent e) throws IOException{
         listView.getItems().clear();
         listView.getSelectionModel().clearSelection();
-
+        //engine.loadContent(null);
 
         loadDataVtoE();
         listView.getItems().addAll(dictionary.getData().keySet());
