@@ -1,9 +1,13 @@
 package sample;
 
 import com.sun.xml.internal.ws.api.pipe.Engine;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
@@ -23,14 +27,27 @@ public class Controller implements Initializable {
     private WebView webView;
     private WebEngine engine;
 
-    public void loadData() throws IOException {
-        dictionary.importData();
+    @FXML
+    private TextField textField;
+
+//    @FXML
+//    private Button buttonEtoV;
+//
+//    @FXML
+//    private Button buttonVtoE;
+
+    public void loadDataEtoV() throws IOException {
+        dictionary.importDataEtoV();
+    }
+
+    public void loadDataVtoE() throws IOException {
+        dictionary.importDataVtoE();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try{
-            loadData();
+            loadDataEtoV();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,7 +60,41 @@ public class Controller implements Initializable {
                     engine.loadContent(explain, "text/html");
                 }
         );
+
+        System.out.println("2");
     }
 
+    public void del(ActionEvent e) {
+        listView.getItems().clear();
+        listView.getSelectionModel().clearSelection();
 
+    }
+
+    public void search() {
+        String s = textField.getText();
+
+        listView.getItems().clear();
+        listView.getSelectionModel().clearSelection();
+
+        listView.getItems().addAll(dictionary.searchWord(s.toLowerCase()));
+    }
+
+    public void setSceneEtoV(ActionEvent e) throws IOException{
+        listView.getItems().clear();
+        listView.getSelectionModel().clearSelection();
+
+        loadDataEtoV();
+        listView.getItems().addAll(dictionary.getData().keySet());
+    }
+
+    public void setSceneVtoE(ActionEvent e) throws IOException{
+        listView.getItems().clear();
+        listView.getSelectionModel().clearSelection();
+
+
+        loadDataVtoE();
+        listView.getItems().addAll(dictionary.getData().keySet());
+
+        System.out.println("1");
+    }
 }

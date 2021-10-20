@@ -2,7 +2,9 @@ package sample;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class Dictionary {
@@ -13,8 +15,10 @@ public class Dictionary {
     }
 
 
-    public void importData() throws IOException {
-        FileReader fileReader = new FileReader("C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\data.txt");
+    public void importDataEtoV() throws IOException {
+        data.clear();
+
+        FileReader fileReader = new FileReader("C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\E_V.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String str;
         while ((str = bufferedReader.readLine()) != null) {
@@ -25,6 +29,26 @@ public class Dictionary {
 
             data.put(key, newWord);
         }
+
+        System.out.println("Success1");
+    }
+
+    public void importDataVtoE() throws IOException {
+        data.clear();
+
+        FileReader fileReader = new FileReader("C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\V_E.txt");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String str;
+        while ((str = bufferedReader.readLine()) != null) {
+            String[] word = str.split("<html>");
+            String key = word[0];
+            String word_ex = word[1];
+            Word newWord = new Word(key, word_ex);
+
+            data.put(key, newWord);
+        }
+
+        System.out.println("Success2");
     }
 
     public void showAllWord() {
@@ -43,13 +67,30 @@ public class Dictionary {
         data.put(newTg, newWord);
     }
 
-//    public void findWord(String key) {
-//        //Word[] words = new Word[]{data.get(key)};
-//
-////        for (Word i : words) {
-////            i.printWord();
-////        }
-//        System.out.println(data.get(key));
-//    }
 
+    public Set<String> searchWord(String s) {
+        Set<String> findWord = new HashSet<>();
+         s.trim();
+         s.toLowerCase();
+        for (String key : data.keySet()) {
+            String word = key.toLowerCase();
+            if (word.startsWith(s)) {
+                findWord.add(key);
+            }
+        }
+
+        return findWord;
+    }
+
+    public void show() {
+//        for (int i = 0; i < 5; i++) {
+//            data
+//        }
+    }
+
+//    public static void main(String[] args) throws IOException{
+//        Dictionary dictionary = new Dictionary();
+//        dictionary.importDataVtoE();
+//        dictionary.showAllWord();
+//    }
 }
