@@ -18,7 +18,7 @@ public class addController implements Initializable {
     @FXML
     private TextField explain;
 
-    public void Submit(ActionEvent e) {
+    public  void Submit(ActionEvent e) {
         String newTarget = target.getText();
         String newExplain = explain.getText();
 

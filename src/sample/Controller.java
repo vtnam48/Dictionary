@@ -1,10 +1,10 @@
 package sample;
 
-import com.sun.xml.internal.ws.api.pipe.Engine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
@@ -73,14 +73,12 @@ public class Controller implements Initializable {
         String s = textField.getText();
 
         listView.getItems().clear();
-        //listView.getSelectionModel().clearSelection();
 
         listView.getItems().addAll(dictionary.searchWord(s.toLowerCase()));
     }
 
     public void setSceneEtoV(ActionEvent e) throws IOException{
         listView.getItems().clear();
-        //engine.loadContent(null);
 
         loadDataEtoV();
         listView.getItems().addAll(dictionary.getData().keySet());
@@ -88,7 +86,6 @@ public class Controller implements Initializable {
 
     public void setSceneVtoE(ActionEvent e) throws IOException{
         listView.getItems().clear();
-        //engine.loadContent(null);
 
         loadDataVtoE();
         listView.getItems().addAll(dictionary.getData().keySet());
@@ -101,12 +98,13 @@ public class Controller implements Initializable {
 
 
     public void addNewWord(ActionEvent e) throws IOException{
-        Stage stage = new Stage();
+        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("addNewWord.fxml"));
         Parent newWord = loader.load();
 
         Scene scene = new Scene(newWord);
+
 //        StudentDetailController controller = loader.getController();
 //        Student selected = table.getSelectionModel().getSelectedItem();
 //        controller.setStudent(selected);
@@ -114,4 +112,5 @@ public class Controller implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 }

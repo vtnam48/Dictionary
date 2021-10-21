@@ -3,7 +3,6 @@ package sample;
 import java.io.*;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 
