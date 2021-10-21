@@ -58,11 +58,7 @@ public class Dictionary {
         }
     }
 
-    public void addNewWord() {
-        Scanner scanner = new Scanner(System.in);
-        String newTg = scanner.nextLine();
-        String newEx = scanner.nextLine();
-
+    public void addNewWord(String newTg, String newEx) {
         Word newWord = new Word(newTg, newEx);
         data.put(newTg, newWord);
     }

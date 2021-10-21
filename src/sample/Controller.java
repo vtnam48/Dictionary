@@ -3,22 +3,22 @@ package sample;
 import com.sun.xml.internal.ws.api.pipe.Engine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class Controller implements Initializable {
-    Dictionary dictionary = new Dictionary();
+    public static Dictionary dictionary = new Dictionary();
 
     @FXML
     private ListView listView;
@@ -30,11 +30,6 @@ public class Controller implements Initializable {
     @FXML
     private TextField textField;
 
-//    @FXML
-//    private Button buttonEtoV;
-//
-//    @FXML
-//    private Button buttonVtoE;
 
     public void loadDataEtoV() throws IOException {
         dictionary.importDataEtoV();
@@ -51,6 +46,7 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         listView.getItems().addAll(dictionary.getData().keySet());
         listView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
@@ -77,14 +73,13 @@ public class Controller implements Initializable {
         String s = textField.getText();
 
         listView.getItems().clear();
-        listView.getSelectionModel().clearSelection();
+        //listView.getSelectionModel().clearSelection();
 
         listView.getItems().addAll(dictionary.searchWord(s.toLowerCase()));
     }
 
     public void setSceneEtoV(ActionEvent e) throws IOException{
         listView.getItems().clear();
-        listView.getSelectionModel().clearSelection();
         //engine.loadContent(null);
 
         loadDataEtoV();
@@ -93,12 +88,30 @@ public class Controller implements Initializable {
 
     public void setSceneVtoE(ActionEvent e) throws IOException{
         listView.getItems().clear();
-        listView.getSelectionModel().clearSelection();
         //engine.loadContent(null);
 
         loadDataVtoE();
         listView.getItems().addAll(dictionary.getData().keySet());
+    }
 
-        System.out.println("1");
+    public void test(ActionEvent e) {
+        dictionary.addNewWord("123","123");
+        listView.getItems().add(dictionary.getData().get("123").getWord_target());
+    }
+
+
+    public void addNewWord(ActionEvent e) throws IOException{
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("addNewWord.fxml"));
+        Parent newWord = loader.load();
+
+        Scene scene = new Scene(newWord);
+//        StudentDetailController controller = loader.getController();
+//        Student selected = table.getSelectionModel().getSelectedItem();
+//        controller.setStudent(selected);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }
