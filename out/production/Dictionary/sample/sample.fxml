@@ -11,9 +11,10 @@
       <ListView fx:id="listView" layoutX="-1.0" layoutY="55.0" prefHeight="546.0" prefWidth="281.0" />
       <WebView fx:id="webView" layoutX="280.0" layoutY="55.0" prefHeight="546.0" prefWidth="520.0" />
       <TextField fx:id="textField" layoutY="24.0" onKeyReleased="#search" prefHeight="31.0" prefWidth="281.0" />
-      <Button layoutX="383.0" layoutY="24.0" mnemonicParsing="false" onAction="#test" text="Clear" />
-      <Button layoutX="475.0" layoutY="24.0" mnemonicParsing="false" onAction="#setSceneEtoV" text="E-V" />
-      <Button layoutX="590.0" layoutY="24.0" mnemonicParsing="false" onAction="#setSceneVtoE" text="V-E" />
+      <Button layoutX="420.0" layoutY="24.0" mnemonicParsing="false" onAction="#del" text="Del" />
+      <Button layoutX="683.0" layoutY="24.0" mnemonicParsing="false" onAction="#setSceneEtoV" text="E-V" />
+      <Button layoutX="734.0" layoutY="24.0" mnemonicParsing="false" onAction="#setSceneVtoE" text="V-E" />
       <Button layoutX="296.0" layoutY="24.0" mnemonicParsing="false" onAction="#addNewWord" text="Add" />
+      <Button layoutX="359.0" layoutY="24.0" mnemonicParsing="false" onAction="#edit" text="edit" />
    </children>
 </AnchorPane>

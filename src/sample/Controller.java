@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
@@ -59,15 +58,8 @@ public class Controller implements Initializable {
 
                 }
         );
-
-        System.out.println("2");
     }
 
-    public void del(ActionEvent e) {
-        listView.getItems().clear();
-        listView.getSelectionModel().clearSelection();
-
-    }
 
     public void search() {
         String s = textField.getText();
@@ -98,19 +90,51 @@ public class Controller implements Initializable {
 
 
     public void addNewWord(ActionEvent e) throws IOException{
-        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        //Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("addNewWord.fxml"));
         Parent newWord = loader.load();
 
         Scene scene = new Scene(newWord);
 
-//        StudentDetailController controller = loader.getController();
-//        Student selected = table.getSelectionModel().getSelectedItem();
-//        controller.setStudent(selected);
-
         stage.setScene(scene);
         stage.show();
     }
 
+    public void edit(ActionEvent e) throws IOException{
+        //Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("edit.fxml"));
+        Parent newWord = loader.load();
+
+        Scene scene = new Scene(newWord);
+
+        edit newedit = loader.getController();
+        try {
+            String editWord = listView.getSelectionModel().getSelectedItem().toString();
+            Word word = dictionary.getData().get(editWord);
+            dictionary.getData().remove(editWord);
+            newedit.setTextField(word.getWord_target());
+            newedit.setHtmlEditor(word.getWord_explain());
+            stage.setScene(scene);
+            stage.show();
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            System.out.println(0);
+        }
+
+    }
+
+    public void del(ActionEvent e) {
+        try {
+            String delWord = listView.getSelectionModel().getSelectedItem().toString();
+            dictionary.getData().remove(delWord);
+
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            System.out.println(0);
+        }
+    }
 }
