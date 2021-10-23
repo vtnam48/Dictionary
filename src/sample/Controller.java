@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     public static Dictionary dictionary = new Dictionary();
+    private static final String PATH_VE = "C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\data\\V_E.txt";
+    private static final String PATH_EV = "C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\data\\E_V.txt";
 
     @FXML
     private ListView listView;
@@ -31,11 +33,11 @@ public class Controller implements Initializable {
 
 
     public void loadDataEtoV() throws IOException {
-        dictionary.importDataEtoV();
+        dictionary.importData(PATH_EV);
     }
 
     public void loadDataVtoE() throws IOException {
-        dictionary.importDataVtoE();
+        dictionary.importData(PATH_VE);
     }
 
     @Override
@@ -83,17 +85,12 @@ public class Controller implements Initializable {
         listView.getItems().addAll(dictionary.getData().keySet());
     }
 
-    public void test(ActionEvent e) {
-        dictionary.addNewWord("123","123");
-        listView.getItems().add(dictionary.getData().get("123").getWord_target());
-    }
 
 
     public void addNewWord(ActionEvent e) throws IOException{
-        //Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("addNewWord.fxml"));
+        loader.setLocation(getClass().getResource("fxmlFile/addNewWord.fxml"));
         Parent newWord = loader.load();
 
         Scene scene = new Scene(newWord);
@@ -103,21 +100,20 @@ public class Controller implements Initializable {
     }
 
     public void edit(ActionEvent e) throws IOException{
-        //Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("edit.fxml"));
+        loader.setLocation(getClass().getResource("fxmlFile/edit.fxml"));
         Parent newWord = loader.load();
 
         Scene scene = new Scene(newWord);
 
-        edit newedit = loader.getController();
+        EditController newEdit = loader.getController();
         try {
             String editWord = listView.getSelectionModel().getSelectedItem().toString();
             Word word = dictionary.getData().get(editWord);
             dictionary.getData().remove(editWord);
-            newedit.setTextField(word.getWord_target());
-            newedit.setHtmlEditor(word.getWord_explain());
+            newEdit.setTextField(word.getWord_target());
+            newEdit.setHtmlEditor(word.getWord_explain());
             stage.setScene(scene);
             stage.show();
         } catch (NullPointerException ex) {
@@ -139,10 +135,9 @@ public class Controller implements Initializable {
     }
 
     public void translate(ActionEvent e) throws IOException{
-        //Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("translate.fxml"));
+        loader.setLocation(getClass().getResource("fxmlFile/translate.fxml"));
         Parent newWord = loader.load();
 
         Scene scene = new Scene(newWord);

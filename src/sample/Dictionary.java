@@ -14,10 +14,10 @@ public class Dictionary {
     }
 
 
-    public void importDataEtoV() throws IOException {
+    public void importData(String path) throws IOException {
         data.clear();
 
-        FileReader fileReader = new FileReader("C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\E_V.txt");
+        FileReader fileReader = new FileReader(path);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String str;
         while ((str = bufferedReader.readLine()) != null) {
@@ -29,33 +29,7 @@ public class Dictionary {
             data.put(key, newWord);
         }
 
-        System.out.println("Success1");
-    }
-
-    public void importDataVtoE() throws IOException {
-        data.clear();
-        //"C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\V_E.txt"
-//        sample/E_V.txt
-        FileReader fileReader = new FileReader("C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\V_E.txt");
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String str;
-        while ((str = bufferedReader.readLine()) != null) {
-            String[] word = str.split("<html>");
-            String key = word[0];
-            String word_ex = word[1];
-            Word newWord = new Word(key, word_ex);
-
-            data.put(key, newWord);
-        }
-
-        System.out.println("Success2");
-    }
-
-    public void showAllWord() {
-        for (String key : data.keySet()) {
-            Word a = data.get(key);
-            a.printWord();
-        }
+        System.out.println("Success");
     }
 
     public void addNewWord(String newTg, String newEx) {

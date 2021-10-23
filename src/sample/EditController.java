@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
-public class edit {
+public class EditController {
     @FXML
     private TextField textField;
 
@@ -29,6 +29,8 @@ public class edit {
         Controller.dictionary.getData().remove(newTarget);
         Controller.dictionary.addNewWord(newTarget, newExplain);
 
+        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     public void Cancel(ActionEvent e) {

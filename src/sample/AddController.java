@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class addController implements Initializable {
+public class AddController implements Initializable {
 
     @FXML
     private TextField target;
@@ -24,6 +24,8 @@ public class addController implements Initializable {
 
         Controller.dictionary.addNewWord(newTarget, newExplain);
 
+        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     public void Cancel(ActionEvent e) {
