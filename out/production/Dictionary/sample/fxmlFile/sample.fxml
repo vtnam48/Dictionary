@@ -15,7 +15,8 @@
       <Button layoutX="683.0" layoutY="24.0" mnemonicParsing="false" onAction="#setSceneEtoV" text="E-V" />
       <Button layoutX="734.0" layoutY="24.0" mnemonicParsing="false" onAction="#setSceneVtoE" text="V-E" />
       <Button layoutX="296.0" layoutY="24.0" mnemonicParsing="false" onAction="#addNewWord" text="Add" />
-      <Button layoutX="359.0" layoutY="24.0" mnemonicParsing="false" onAction="#edit" text="edit" />
+      <Button layoutX="359.0" layoutY="24.0" mnemonicParsing="false" onAction="#edit" text="Edit" />
       <Button layoutX="488.0" layoutY="24.0" mnemonicParsing="false" onAction="#translate" text="Translate" />
+      <Button layoutX="705.0" layoutY="66.0" mnemonicParsing="false" onAction="#TTS" prefHeight="31.0" prefWidth="80.0" text="Sound" />
    </children>
 </AnchorPane>

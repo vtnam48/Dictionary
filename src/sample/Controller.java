@@ -130,7 +130,6 @@ public class Controller implements Initializable {
 
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            System.out.println(0);
         }
     }
 
@@ -144,6 +143,16 @@ public class Controller implements Initializable {
 
         stage.setScene(scene);
         stage.show();
-        System.out.println(1);
+    }
+
+    public void TTS(ActionEvent e) {
+        try {
+            String delWord = listView.getSelectionModel().getSelectedItem().toString();
+
+            TextToSpeechController.tts(delWord);
+        } catch (NullPointerException e1) {
+            System.out.println("Chua chon tu");
+        }
+
     }
 }

@@ -32,12 +32,6 @@ public class TranslatorController  implements Initializable {
 
     private boolean EV = true;
 
-    public static void main(String[] args) throws IOException {
-        String text = "i love you";
-        //Translated text: Hallo Welt!
-        System.out.println("Translated text: " + translate("en", "vi", text));
-    }
-
     private static String translate(String langFrom, String langTo, String text) throws IOException {
         // INSERT YOU URL HERE
         String urlStr = "https://script.google.com/macros/s/AKfycbwX1NA9ZOYgS8xUuwpb-VzdigKT3j9IUvpTT-QoD-ipgr4tGbiJmxeonwltCVQZZ4zN6A/exec" +
