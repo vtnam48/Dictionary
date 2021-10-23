@@ -16,5 +16,6 @@
       <Button layoutX="734.0" layoutY="24.0" mnemonicParsing="false" onAction="#setSceneVtoE" text="V-E" />
       <Button layoutX="296.0" layoutY="24.0" mnemonicParsing="false" onAction="#addNewWord" text="Add" />
       <Button layoutX="359.0" layoutY="24.0" mnemonicParsing="false" onAction="#edit" text="edit" />
+      <Button layoutX="488.0" layoutY="24.0" mnemonicParsing="false" onAction="#translate" text="Translate" />
    </children>
 </AnchorPane>

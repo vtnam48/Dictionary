@@ -121,8 +121,8 @@ public class Controller implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (NullPointerException ex) {
-            ex.printStackTrace();
-            System.out.println(0);
+//            ex.printStackTrace();
+            System.out.println("Chua chon tu");
         }
 
     }
@@ -136,5 +136,19 @@ public class Controller implements Initializable {
             ex.printStackTrace();
             System.out.println(0);
         }
+    }
+
+    public void translate(ActionEvent e) throws IOException{
+        //Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("translate.fxml"));
+        Parent newWord = loader.load();
+
+        Scene scene = new Scene(newWord);
+
+        stage.setScene(scene);
+        stage.show();
+        System.out.println(1);
     }
 }

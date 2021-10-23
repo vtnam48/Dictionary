@@ -34,7 +34,8 @@ public class Dictionary {
 
     public void importDataVtoE() throws IOException {
         data.clear();
-
+        //"C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\V_E.txt"
+//        sample/E_V.txt
         FileReader fileReader = new FileReader("C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\V_E.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String str;
@@ -77,15 +78,4 @@ public class Dictionary {
         return findWord;
     }
 
-    public void show() {
-//        for (int i = 0; i < 5; i++) {
-//            data
-//        }
-    }
-
-//    public static void main(String[] args) throws IOException{
-//        Dictionary dictionary = new Dictionary();
-//        dictionary.importDataVtoE();
-//        dictionary.showAllWord();
-//    }
 }
