@@ -25,7 +25,4 @@ public class Word {
         setWord_explain(word_explain);
     }
 
-    public void printWord() {
-        System.out.println(getWord_target() + " " + getWord_explain());
-    }
 }

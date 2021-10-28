@@ -22,7 +22,13 @@ public class AddController implements Initializable {
         String newTarget = target.getText();
         String newExplain = explain.getText();
 
-        Controller.dictionary.addNewWord(newTarget, newExplain);
+        if (Controller.getStatus() == 0) {
+            Controller.dictionary.addNewWordEV(newTarget, newExplain);
+            System.out.println(Controller.getStatus());
+        } else {
+            Controller.dictionary.addNewWordVE(newTarget, newExplain);
+
+        }
 
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.close();

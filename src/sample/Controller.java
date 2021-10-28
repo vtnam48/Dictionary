@@ -18,8 +18,10 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     public static Dictionary dictionary = new Dictionary();
-    private static final String PATH_VE = "C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\data\\V_E.txt";
-    private static final String PATH_EV = "C:\\Users\\vuthe\\Desktop\\Dictionary\\src\\sample\\data\\E_V.txt";
+
+//    status  = 0 Tiếng Anh
+//    status  = 1 Tiếng Việt
+    public static int status = 0;
 
     @FXML
     private ListView listView;
@@ -32,22 +34,26 @@ public class Controller implements Initializable {
     private TextField textField;
 
 
-    public void loadDataEtoV() throws IOException {
-        dictionary.importData(PATH_EV);
+    public static int getStatus() {
+        return status;
     }
 
-    public void loadDataVtoE() throws IOException {
-        dictionary.importData(PATH_VE);
+    public void loadDataEtoV() {
+        dictionary.importDataEV();
+        status = 0;
+    }
+
+    public void loadDataVtoE() {
+        dictionary.importDataVE();
+        status = 1;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try{
-            loadDataEtoV();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        loadDataEtoV();
+        loadWord();
+    }
+    public void loadWord() {
         listView.getItems().addAll(dictionary.getData().keySet());
         listView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
@@ -61,7 +67,6 @@ public class Controller implements Initializable {
                 }
         );
     }
-
 
     public void search() {
         String s = textField.getText();
@@ -111,13 +116,11 @@ public class Controller implements Initializable {
         try {
             String editWord = listView.getSelectionModel().getSelectedItem().toString();
             Word word = dictionary.getData().get(editWord);
-            dictionary.getData().remove(editWord);
             newEdit.setTextField(word.getWord_target());
             newEdit.setHtmlEditor(word.getWord_explain());
             stage.setScene(scene);
             stage.show();
         } catch (NullPointerException ex) {
-//            ex.printStackTrace();
             System.out.println("Chua chon tu");
         }
 
@@ -126,7 +129,11 @@ public class Controller implements Initializable {
     public void del(ActionEvent e) {
         try {
             String delWord = listView.getSelectionModel().getSelectedItem().toString();
-            dictionary.getData().remove(delWord);
+            if (status == 0) {
+                DBController.deleteEV(delWord);
+            } else {
+                DBController.deleteVE(delWord);
+            }
 
         } catch (NullPointerException ex) {
             ex.printStackTrace();
@@ -153,6 +160,21 @@ public class Controller implements Initializable {
         } catch (NullPointerException e1) {
             System.out.println("Chua chon tu");
         }
+    }
 
+    public void refresh(ActionEvent e){
+        listView.getItems().clear();
+        textField.clear();
+
+        engine = webView.getEngine();
+        engine.loadContent("", "text/html");
+
+        if (status == 0) {
+            loadDataEtoV();
+        } else {
+            loadDataVtoE();
+        }
+
+        loadWord();
     }
 }

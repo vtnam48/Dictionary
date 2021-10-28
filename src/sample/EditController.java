@@ -26,8 +26,12 @@ public class EditController {
         String newTarget = textField.getText();
         String newExplain = htmlEditor.getHtmlText();
 
-        Controller.dictionary.getData().remove(newTarget);
-        Controller.dictionary.addNewWord(newTarget, newExplain);
+        if (Controller.getStatus() == 0) {
+            DBController.updateEV(newTarget, newExplain);
+        } else {
+            DBController.updateVE(newTarget, newExplain);
+
+        }
 
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.close();

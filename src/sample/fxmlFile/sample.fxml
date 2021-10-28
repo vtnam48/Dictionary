@@ -20,5 +20,6 @@
       <Button layoutX="488.0" layoutY="24.0" mnemonicParsing="false" onAction="#translate" text="Translate" />
       <Button layoutX="694.0" layoutY="65.0" mnemonicParsing="false" onAction="#TTS" prefHeight="31.0" prefWidth="80.0" text="Sound" />
       <CheckBox layoutX="581.0" layoutY="70.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="99.0" text="Favourite" />
+      <Button layoutX="462.0" layoutY="65.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
    </children>
 </AnchorPane>
