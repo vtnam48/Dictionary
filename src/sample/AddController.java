@@ -2,15 +2,12 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class AddController implements Initializable {
+public class AddController{
 
     @FXML
     private TextField target;
@@ -22,12 +19,33 @@ public class AddController implements Initializable {
         String newTarget = target.getText();
         String newExplain = explain.getText();
 
-        if (Controller.getStatus() == 0) {
-            Controller.dictionary.addNewWordEV(newTarget, newExplain);
-            System.out.println(Controller.getStatus());
-        } else {
-            Controller.dictionary.addNewWordVE(newTarget, newExplain);
+        int status = Controller.getStatus();
 
+        if (newTarget.trim().equals("") || newExplain.trim().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Add message");
+            alert.setHeaderText("Error!");
+            alert.setContentText("New word target or New word explain is empty!");
+            alert.show();
+        } else if ((status==0 && DBController.checkExitEV(newTarget))
+                    || ((status==1 && DBController.checkExitVE(newTarget)))) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Add message");
+            alert.setHeaderText("Error!");
+            alert.setContentText("Word already exists!");
+            alert.show();
+        } else {
+            if (status == 0) {
+                Controller.dictionary.addNewWordEV(newTarget, newExplain);
+            } else {
+                Controller.dictionary.addNewWordVE(newTarget, newExplain);
+            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Add message");
+            alert.setHeaderText("Success!");
+            alert.setContentText("Add new word success!");
+            alert.show();
         }
 
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -37,10 +55,5 @@ public class AddController implements Initializable {
     public void Cancel(ActionEvent e) {
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.close();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

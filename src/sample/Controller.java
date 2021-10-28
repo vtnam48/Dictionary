@@ -6,11 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -121,7 +124,11 @@ public class Controller implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (NullPointerException ex) {
-            System.out.println("Chua chon tu");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Edit message");
+            alert.setHeaderText("Error!");
+            alert.setContentText("Word is not selected!");
+            alert.show();
         }
 
     }
@@ -135,8 +142,18 @@ public class Controller implements Initializable {
                 DBController.deleteVE(delWord);
             }
 
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Delete message");
+            alert.setHeaderText("Success!");
+            alert.setContentText("Delete word success!");
+            alert.show();
+
         } catch (NullPointerException ex) {
-            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Delete message");
+            alert.setHeaderText("Error!");
+            alert.setContentText("Word is not selected!");
+            alert.show();
         }
     }
 
@@ -158,7 +175,11 @@ public class Controller implements Initializable {
 
             TextToSpeechController.tts(word);
         } catch (NullPointerException ex) {
-            System.out.println("Chua chon tu");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Delete message");
+            alert.setHeaderText("Error!");
+            alert.setContentText("Word is not selected!");
+            alert.show();
         }
     }
 

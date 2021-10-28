@@ -60,7 +60,6 @@ public class DBController {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, target);
             pstmt.executeUpdate();
-            System.out.println(123);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -109,4 +108,51 @@ public class DBController {
             e.printStackTrace();
         }
     }
+
+    public static boolean checkExitEV(String target) {
+        String query = "SELECT COUNT(*) FROM entovie WHERE word_target = '" + target + "'";
+
+        int kq = 0;
+        try {
+            Connection connection = getConnection();
+            Statement pstmt = connection.createStatement();
+            ResultSet rs = pstmt.executeQuery(query);
+
+            if(rs.next()) {
+                kq = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (kq == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkExitVE(String target) {
+        String query = "SELECT COUNT(*) FROM vietoen WHERE word_target = '" + target + "'";
+
+        int kq = 0;
+        try {
+            Connection connection = getConnection();
+            Statement pstmt = connection.createStatement();
+            ResultSet rs = pstmt.executeQuery(query);
+
+            if(rs.next()) {
+                kq = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (kq == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
