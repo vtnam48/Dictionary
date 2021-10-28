@@ -154,27 +154,33 @@ public class Controller implements Initializable {
 
     public void TTS(ActionEvent e) {
         try {
-            String delWord = listView.getSelectionModel().getSelectedItem().toString();
+            String word = listView.getSelectionModel().getSelectedItem().toString();
 
-            TextToSpeechController.tts(delWord);
-        } catch (NullPointerException e1) {
+            TextToSpeechController.tts(word);
+        } catch (NullPointerException ex) {
             System.out.println("Chua chon tu");
         }
     }
 
     public void refresh(ActionEvent e){
+        //Refresh list view
         listView.getItems().clear();
+
+        //Refresh search text field
         textField.clear();
 
+        //Refresh webview
         engine = webView.getEngine();
         engine.loadContent("", "text/html");
 
+        //Refresh database
         if (status == 0) {
             loadDataEtoV();
         } else {
             loadDataVtoE();
         }
 
+        //Reload
         loadWord();
     }
 }

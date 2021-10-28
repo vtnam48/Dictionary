@@ -2,9 +2,8 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,9 +13,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ResourceBundle;
 
-public class TranslatorController  implements Initializable {
+public class TranslatorController {
 
     @FXML
     private TextField textFrom;
@@ -25,15 +23,11 @@ public class TranslatorController  implements Initializable {
     private  TextField textTo;
 
     @FXML
-    private RadioMenuItem itemev;
-
-    @FXML
-    private RadioMenuItem itemve;
-
-    private boolean EV = true;
+    private Button button;
+    private int status = 0;
 
     private static String translate(String langFrom, String langTo, String text) throws IOException {
-        // INSERT YOU URL HERE
+
         String urlStr = "https://script.google.com/macros/s/AKfycbwX1NA9ZOYgS8xUuwpb-VzdigKT3j9IUvpTT-QoD-ipgr4tGbiJmxeonwltCVQZZ4zN6A/exec" +
                 "?q=" + URLEncoder.encode(text, "UTF-8") +
                 "&target=" + langTo +
@@ -51,22 +45,14 @@ public class TranslatorController  implements Initializable {
         return response.toString();
     }
 
-    public void setEV(ActionEvent e) {
-        EV = true;
-    }
-
-    public void setVE(ActionEvent e) {
-        EV = false;
-    }
-
     public void trans(ActionEvent e) throws IOException{
         String tFrom = textFrom.getText();
         String tTo = "";
 
-        if (itemev.isSelected()) {
+        if (status == 0) {
             tTo = translate("en", "vi", tFrom);
-        }
-        if (itemve.isSelected()){
+        } else {
+
             tTo = translate("vi", "en", tFrom);
         }
 
@@ -78,8 +64,16 @@ public class TranslatorController  implements Initializable {
         stage.close();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void changeStatus(ActionEvent e) {
+        textTo.clear();
+        textFrom.clear();
 
+        if (status == 0){
+            button.setText("V_E");
+            status = 1;
+        } else {
+            button.setText("E_V");
+            status = 0;
+        }
     }
 }
