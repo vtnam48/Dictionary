@@ -7,8 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -36,6 +38,9 @@ public class Controller implements Initializable {
     @FXML
     private TextField textField;
 
+    @FXML
+    private Button button;
+
 
     public static int getStatus() {
         return status;
@@ -44,15 +49,18 @@ public class Controller implements Initializable {
     public void loadDataEtoV() {
         dictionary.importDataEV();
         status = 0;
+        button.setText("E_V");
     }
 
     public void loadDataVtoE() {
         dictionary.importDataVE();
         status = 1;
+        button.setText("V_E");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         loadDataEtoV();
         loadWord();
     }
@@ -79,23 +87,19 @@ public class Controller implements Initializable {
         listView.getItems().addAll(dictionary.searchWord(s.toLowerCase()));
     }
 
-    public void setSceneEtoV(ActionEvent e) throws IOException{
+    public void setScene(ActionEvent e){
         listView.getItems().clear();
-
-        loadDataEtoV();
+        if (status == 0) {
+            loadDataVtoE();
+        } else {
+            loadDataEtoV();
+        }
         listView.getItems().addAll(dictionary.getData().keySet());
-    }
 
-    public void setSceneVtoE(ActionEvent e) throws IOException{
-        listView.getItems().clear();
-
-        loadDataVtoE();
-        listView.getItems().addAll(dictionary.getData().keySet());
     }
 
 
-
-    public void addNewWord(ActionEvent e) throws IOException{
+    public void addNewWord(MouseEvent e) throws IOException{
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("fxmlFile/addNewWord.fxml"));
@@ -107,7 +111,7 @@ public class Controller implements Initializable {
         stage.show();
     }
 
-    public void edit(ActionEvent e) throws IOException{
+    public void edit(MouseEvent e) throws IOException{
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("fxmlFile/edit.fxml"));
@@ -133,7 +137,7 @@ public class Controller implements Initializable {
 
     }
 
-    public void del(ActionEvent e) {
+    public void delete(MouseEvent e) {
         try {
             String delWord = listView.getSelectionModel().getSelectedItem().toString();
             if (status == 0) {
@@ -157,7 +161,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void translate(ActionEvent e) throws IOException{
+    public void translate(MouseEvent e) throws IOException{
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("fxmlFile/translate.fxml"));
@@ -169,7 +173,7 @@ public class Controller implements Initializable {
         stage.show();
     }
 
-    public void TTS(ActionEvent e) {
+    public void TTS(MouseEvent e) {
         try {
             String word = listView.getSelectionModel().getSelectedItem().toString();
 
@@ -183,7 +187,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void refresh(ActionEvent e){
+    public void refresh(MouseEvent e){
         //Refresh list view
         listView.getItems().clear();
 
@@ -204,4 +208,17 @@ public class Controller implements Initializable {
         //Reload
         loadWord();
     }
+
+    public void about(MouseEvent e) throws IOException{
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("fxmlFile/about.fxml"));
+        Parent newWord = loader.load();
+
+        Scene scene = new Scene(newWord);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }
