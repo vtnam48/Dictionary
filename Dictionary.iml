@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/freetts-1.2.2-bin/freetts-1.2/lib/mbrola.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-5.1.5-bin.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/freetts-1.2.2-bin/freetts-1.2/lib/jsapi.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/mbrola.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/freetts-1.2.2-bin/freetts-1.2/lib/freetts.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jsapi.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,7 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/freetts-1.2.2-bin/freetts-1.2/lib/freetts-jsapi10.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/freetts.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -46,7 +46,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/freetts-1.2.2-bin/freetts-1.2/lib/en_us.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/freetts-jsapi10.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -55,7 +55,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/freetts-1.2.2-bin/freetts-1.2/lib/cmu_us_kal.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/en_us.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -64,7 +64,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/freetts-1.2.2-bin/freetts-1.2/lib/cmu_time_awb.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/cmu_us_kal.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -73,7 +73,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-5.1.5-bin.jar/mysql-connector-java-5.1.5-bin.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/cmu_time_awb.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

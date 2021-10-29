@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -19,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -41,6 +39,12 @@ public class Controller implements Initializable {
     @FXML
     private Button button;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        loadDataEtoV();
+        loadWord();
+    }
 
     public static int getStatus() {
         return status;
@@ -58,12 +62,6 @@ public class Controller implements Initializable {
         button.setText("V_E");
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        loadDataEtoV();
-        loadWord();
-    }
     public void loadWord() {
         listView.getItems().addAll(dictionary.getData().keySet());
         listView.getSelectionModel().selectedItemProperty().addListener(
@@ -97,7 +95,6 @@ public class Controller implements Initializable {
         listView.getItems().addAll(dictionary.getData().keySet());
 
     }
-
 
     public void addNewWord(MouseEvent e) throws IOException{
         Stage stage = new Stage();
@@ -139,18 +136,33 @@ public class Controller implements Initializable {
 
     public void delete(MouseEvent e) {
         try {
-            String delWord = listView.getSelectionModel().getSelectedItem().toString();
-            if (status == 0) {
-                DBController.deleteEV(delWord);
-            } else {
-                DBController.deleteVE(delWord);
-            }
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Delete message");
-            alert.setHeaderText("Success!");
-            alert.setContentText("Delete word success!");
-            alert.show();
+            Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+            alertConfirm.setTitle("Delete message");
+            alertConfirm.setHeaderText("Confirmation.");
+            alertConfirm.setContentText("You want to delete this word?");
+
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alertConfirm.getButtonTypes().setAll(yes, no);
+
+            Optional<ButtonType> result = alertConfirm.showAndWait();
+
+            if (result.get()==yes) {
+                String delWord = listView.getSelectionModel().getSelectedItem().toString();
+                if (status == 0) {
+                    DBController.deleteEV(delWord);
+                } else {
+                    DBController.deleteVE(delWord);
+                }
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Delete message");
+                alert.setHeaderText("Success!");
+                alert.setContentText("Delete word success!");
+                alert.show();
+            }
 
         } catch (NullPointerException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
